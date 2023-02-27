@@ -1,0 +1,45 @@
+name: Check Code Style and Run Tests
+
+on:
+  push:
+    paths:
+      - "**.py"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Analyse code style with flake8
+      run: |
+        flake8 $(git ls-files "*.py") --count
+
+    - name: Analyse code formatting with black
+      run: |
+        black --check $(git ls-files "*.py")
+
+    - name: Analyse type hinting with mypy
+      run: |
+        mypy $(git ls-files '*.py')
+
+    - name: Analyse import order with isort
+      run: |
+        isort $(git ls-files '*.py')
+
+    - name: Test with pytest
+      run: |
+        pytest

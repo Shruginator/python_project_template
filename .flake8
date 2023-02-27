@@ -1,0 +1,23 @@
+
+[flake8]
+# This is a configuration file for flake8
+exclude =
+    # No need to traverse our git directory
+    .git,
+    # There's no value in checking cache directories
+    __pycache__,
+extend-ignore =
+    # Disable E203 "whitespace before ':'" to not enforce equal amount of whitespace
+    # around slice operators; Necessary for Black
+    E203,
+    # E501 ignored to allow lines longer than max-line-length if reasonable
+    E501,
+    # Disable W503 "line break before binary operator" as Black breaks lines before
+    # a binary operator; Necessary for Black
+    W503
+import-order-style = google
+# Currently recommended line length based on screen resolutions and viewing code side
+# by side
+max-line-length = 88
+# Flake8 and black compatibility, e.g. regarding Bugbear's opinionated checks
+select = C,E,F,W,B,B950

@@ -1,0 +1,4 @@
+# Configuration file for our code coverage tool coverage.py
+[xml]
+# Write the XML report to a specific folder for tidyness purposes
+output = badges/coverage.xml
