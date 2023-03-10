@@ -1,21 +1,21 @@
+# Check the following documentation in order to build your own workflows:
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
 name: Check Code Style and Run Tests
 
-on:
-  push:
-    paths:
-      - "**.py"
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     steps:
-    - uses: actions/checkout@v3
-    
+    - uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -34,7 +34,7 @@ jobs:
 
     - name: Analyse type hinting with mypy
       run: |
-        mypy $(git ls-files '*.py')
+        mypy --config-file ${{ github.workspace }}/mypy.ini $(git ls-files '*.py')
 
     - name: Analyse import order with isort
       run: |
