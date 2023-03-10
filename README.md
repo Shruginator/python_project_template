@@ -12,7 +12,9 @@ Basic usage notes make this self-contained for beginners and provide a quick ref
 Furthermore, an exemplary GitHub Actions workflow is contained to run the checks automatically on code submission.
 
 Everything contained here can be seen as knowledge share.
-Choose for yourself, which parts you like for your project and which not.
+Choose for yourself, which parts you would like to use in your project and simply remove the ones you don't need.
+
+Happy coding!
 
 ## Table of Contents
 1. [Environment Setup](#environment-setup)

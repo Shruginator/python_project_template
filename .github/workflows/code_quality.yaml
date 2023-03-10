@@ -1,9 +1,6 @@
 name: Check Code Style and Run Tests
 
-on:
-  push:
-    paths:
-      - "**.py"
+on: [push]
 
 jobs:
   build:
