@@ -22,8 +22,9 @@ Happy coding!
 2. [Coding Style](#coding-style)
 3. [Testing](#testing)
 4. [GitHub Actions and Workflows](#github-actions-and-workflows)
-5. [Readme Badges](#readme-badges)
-5. [Repo Structure and Files in Detail](#repo-structure-and-files-in-detail)
+5. [Pre-Commit](#pre-commit)
+6. [Readme Badges](#readme-badges)
+7. [Repo Structure and Files in Detail](#repo-structure-and-files-in-detail)
 
 ## Environment Setup
 
@@ -163,6 +164,42 @@ Note that GitHub Actions consumes computing power - by default on GitHub servers
 Private users have 2.000 Actions minutes per month free.
 For business subscriptions this might look different.
 
+## Pre-Commit
+
+With the package `pre-commit` we can perform the code style checks automatically with every commit.
+The idea is to identify issues in the code before submitting it.
+Therefore, if the checks - or (git) hooks as they are called - do not pass, then the commit is rejected.
+
+In order to use pre-commit we set up the git hook scripts with
+
+```sh
+$ pre-commit install
+```
+
+Afterwards it will be automatically invoked upon every `git commit` command.
+
+The following command runs it manually, e.g. to not type the code checks individually:
+
+```sh
+$ pre-commit run
+```
+
+For efficiency, pre-commit only runs on changed files after `git commit`.
+However, when adding new hooks it is a good idea to run them against all of the files.
+This happens with
+
+```sh
+$ pre-commit run --all-files
+```
+
+To automatically update the pinned hook versions in the pre-commit config file, we can run
+
+```sh
+$ pre-commit autoupdate
+```
+
+Note that pre-commit runs the hooks in its own environment, which can be troublesome, if the hook configuration is not identical to the configuration of the individual tools used for checking the code style.
+
 ## Readme Badges
 
 This section provides the information to maintain the badges on top of this readme.
@@ -233,6 +270,7 @@ Here is an overview of the relevant files and folders on the most outer layer of
 - [coveragerc](#coverage-config-file)
 - [.flake8](#flake8-config-file)
 - [.gitignore](#gitignore-config-file)
+- [.pre-commit-config.yaml](#pre-commit-config-file)
 - [.isort.cfg](#isort-config-file)
 - [README.md](#readme-file)
 - [requirements.txt](#requirements-file)
@@ -242,7 +280,7 @@ Their purposes can be found below.
 ### GitHub Folder
 
 The folder `.github/` contains the github workflows under the path `.github/workflows/`.
-See [Github Actions and Workflows](#github-actions-and-workflows) for further information.
+See [GitHub Actions and Workflows](#github-actions-and-workflows) for further information.
 
 ### Badges Folder
 
@@ -293,6 +331,11 @@ The configuration ensures the compatibility with the code formatting package `bl
 `isort`
 [Docu](https://pycqa.github.io/isort/) |
 [PyPi Reference](https://pypi.org/project/isort/)
+
+### Pre-Commit Config File
+
+The file `.pre-commit-config.yaml` configures the GitHub hooks used by pre-commit.
+The same code style checks that we use in the GitHub Action should be included as pre-commit hooks.
 
 ### Readme File
 
