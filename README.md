@@ -52,7 +52,7 @@ In addition, respective GitHub actions are defined within this repo to check the
 
 ### Flake8
 
-To enforce a standard code style we use the package `flake8`.
+To enforce a standard code style we use the package *flake8*.
 To check the code conformity use
 
 ```sh
@@ -63,7 +63,7 @@ in the central project folder.
 It will print style violations and their locations to the console.
 
 ### Black and isort
-Additionally, `black` and `isort` are used for code and import formatting, respectively.
+Additionally, *black* and *isort* are used for code and import formatting, respectively.
 They are invoked similarly with the respective commands
 
 ```sh
@@ -76,11 +76,11 @@ and
 $ isort .
 ```
 
-For `black` we also recommend to add the option `--preview` to the end of the command to allow experimental and potentially disruptive style changes, which have improved string processing, e.g. for dealing with very long strings or comments.
+For *black* we also recommend to add the option `--preview` to the end of the command to allow experimental and potentially disruptive style changes, which have improved string processing, e.g. for dealing with very long strings or comments.
 
-### Mypy
+### MyPy
 
-`Mypy` describes itself as *"essentially a Python linter on steroids, and it can catch many programming errors by analyzing your program, without actually having to run it"*.
+*MyPy* describes itself as *"essentially a Python linter on steroids, and it can catch many programming errors by analyzing your program, without actually having to run it"*.
 In our case, we use it mainly to check type annotations added to our code.
 Invoke the tool via
 
@@ -90,8 +90,8 @@ $ mypy .
 
 ## Testing
 
-For testing we use and recommend the package `pytest`.
-However, the standard `unittest` package or any alternative will also do - just adjust the testing pipeline accordingly, as the GitHub actions will automatically run the tests with `pytest`.
+For testing we use and recommend the package *pytest*.
+However, the standard *unittest* package or any alternative will also do - just adjust the testing pipeline accordingly, as the GitHub actions will automatically run the tests with *pytest*.
 
 In order to run the test suite, use the command
 
@@ -104,7 +104,8 @@ $ pytest
 If the test suite grows bigger and bigger, it might take significant time to run all the tests.
 There are options to run only specific tests, either via keyword (case-insensitive string expression) or by using explicit file, class or function names.
 For example:
-```
+
+```sh
 # Select test file
 $ pytest -k "example_test.py"  # Keyword w/ file name
 $ pytest tests/example_test.py  # File name
@@ -123,12 +124,14 @@ pytest tests/example_test.py::TestHelloWorld::test_return  # File, class and fun
 
 ### Coverage
 
-In order to measure code coverage with tests, we use `coverage`.
+In order to measure code coverage with tests, we use *coverage*.
 Basically, it runs our test suite and checks which parts of our code have been executed and which not.
 This also explains why the running command involves our test suite run command:
-```
+
+```sh
 $ coverage run --source=project_code -m pytest
 ```
+
 Note that we use the option `--source=<project_code>` to specify the folder containing the source code.
 This is necessary to exclude the test files from the coverage summary as they mess up the overall coverage result.
 Additionally, it also finds files that weren't executed at all!
@@ -144,7 +147,7 @@ or `coverage html` to get a more pretty HTML version (which has to be opened out
 
 ## GitHub Actions and Workflows
 
-The GitHub documentation states that, *"GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline.
+The GitHub documentation states that *"GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline.
 You can create workflows that build and test every pull request to your repository, or deploy merged pull requests to production."*
 
 In our project we want to use these tools to automate the code checking.
@@ -166,7 +169,7 @@ For business subscriptions this might look different.
 
 ## Pre-Commit
 
-With the package `pre-commit` we can perform the code style checks automatically with every commit.
+With the package *pre-commit* we can perform the code style checks automatically with every commit.
 The idea is to identify issues in the code before submitting it.
 Therefore, if the checks - or (git) hooks as they are called - do not pass, then the commit is rejected.
 
@@ -203,10 +206,10 @@ Note that pre-commit runs the hooks in its own environment, which can be trouble
 ## Readme Badges
 
 This section provides the information to maintain the badges on top of this readme.
-While the badges for `black` and `isort` are static, the ones for `python`, `coverage` and `flake8` are dynamic and need to be updated, if they should reflect the latest status.
+While the badges for *black* and *isort* are static, the ones for Python, *coverage* and *flake8* are dynamic and need to be updated, if they should reflect the latest status.
 
-For the Python version we use Google's open source `pybadges`.
-For the last two badges we use the library `genbadge`.
+For the Python version we use Google's open source *pybadges*.
+For the last two badges we use the library *genbadge*.
 
 ### Python Version Badge
 
@@ -221,7 +224,7 @@ python -m pybadges \
 ```
 
 This will print the SVG XML to the console and you will have to store it under badges as `python_badge.svg`.
-To write it to the file append something like `> badges/python_badge.svg` based on your current working directory.
+To write it to the file append something like `> badges/python_badge.svg`, based on your current working directory.
 
 Note that the library can be used to create any custom badge.
 
@@ -239,7 +242,7 @@ $ genbadge coverage -i badges/coverage.xml -o badges/coverage_badge.svg
 
 ### Flake8 Badge
 
-The following command generates the necessary `flake8` statistics for the badge:
+The following command generates the necessary *flake8* statistics for the badge:
 
 ```sh
 # Generate flake8 summary
@@ -293,27 +296,27 @@ Feel free to rename the folder, add more folders or files.
 
 ### Tests Folder
 
-The `tests/` folder contains the test routines for `pytest`, which is the recommended testing framework besides the standard `unittest` package.
+The `tests/` folder contains the test routines for *pytest*, which is the recommended testing framework besides the standard *unittest* package.
 
-`pytest`
+*pytest*
 [Docu](https://docs.pytest.org/en/latest/) |
 [PyPi Reference](https://pypi.org/project/pytest/)
 
 ### Coverage Config File
 
-The file `.coveragerc` is the configuration file for `coverage.py`, which we use to measure our test coverage - how much of our code is covered by tests?
+The file `.coveragerc` is the configuration file for *coverage*, which we use to measure our test coverage - how much of our code is covered by tests?
 
-`coverage.py`
+*coverage*
 [Docu](https://coverage.readthedocs.io/en/latest/)
 [PyPi Reference](https://pypi.org/project/coverage/)
 
 
 ### Flake8 Config File
 
-The file `.flake8` is the configuration file for `flake8`.
-It wraps different tools (e.g. [`pycodestyle`](https://pycodestyle.pycqa.org/en/latest/)) that enforce Python style guide ("PEP8").
+The file `.flake8` is the configuration file for *flake8*.
+It wraps different tools (e.g. [*pycodestyle*](https://pycodestyle.pycqa.org/en/latest/)) that enforce Python style guide ("PEP8").
 
-`flake8`
+*flake8*
 [Docu](https://flake8.pycqa.org/en/latest/) |
 [PyPi Reference](https://pypi.org/project/flake8/)
 
@@ -325,16 +328,16 @@ By default the list contains a reasonable set, however, feel free to add entries
 
 ### isort Config File
 
-The `.isort.cfg` file is a configuration file for `isort` - a package to sort Python imports.
-The configuration ensures the compatibility with the code formatting package `black`.
+The `.isort.cfg` file is a configuration file for *isort* - a package to sort Python imports.
+The configuration ensures the compatibility with the code formatting package *black*.
 
-`isort`
+*isort*
 [Docu](https://pycqa.github.io/isort/) |
 [PyPi Reference](https://pypi.org/project/isort/)
 
 ### Pre-Commit Config File
 
-The file `.pre-commit-config.yaml` configures the GitHub hooks used by pre-commit.
+The file `.pre-commit-config.yaml` configures the GitHub hooks used by *pre-commit*.
 The same code style checks that we use in the GitHub Action should be included as pre-commit hooks.
 
 ### Readme File
