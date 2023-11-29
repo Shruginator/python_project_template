@@ -1,5 +1,6 @@
 # Template for a Python Project
 
+![Python Versions](badges/python_badge.svg)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Coverage](badges/coverage_badge.svg)
 ![Flake8 Status](badges/flake8_badge.svg)
@@ -27,14 +28,18 @@ Happy coding!
 ## Environment Setup
 
 Install the packages that are necessary for this template with the following command:
-```
+
+```sh
 $ pip install -r requirements.txt
 ```
+
 After adding additional packages to your environment based on your specific project you should update the requirements file.
 This can be done by running the following command:
-```
+
+```sh
 $ pip freeze > requirements.txt
 ```
+
 Short explanation:
 The first part, `pip freeze`, simply lists all currently installed packages, while `> requirements.txt` is a shell command telling to write that output to the file `requirements.txt`.
 
@@ -48,20 +53,25 @@ In addition, respective GitHub actions are defined within this repo to check the
 
 To enforce a standard code style we use the package `flake8`.
 To check the code conformity use
-```
+
+```sh
 $ flake8 .
 ```
+
 in the central project folder.
 It will print style violations and their locations to the console.
 
 ### Black and isort
 Additionally, `black` and `isort` are used for code and import formatting, respectively.
 They are invoked similarly with the respective commands
-```
+
+```sh
 $ black .
 ```
+
 and
-```
+
+```sh
 $ isort .
 ```
 
@@ -72,7 +82,8 @@ For `black` we also recommend to add the option `--preview` to the end of the co
 `Mypy` describes itself as *"essentially a Python linter on steroids, and it can catch many programming errors by analyzing your program, without actually having to run it"*.
 In our case, we use it mainly to check type annotations added to our code.
 Invoke the tool via
-```
+
+```sh
 $ mypy .
 ```
 
@@ -82,7 +93,8 @@ For testing we use and recommend the package `pytest`.
 However, the standard `unittest` package or any alternative will also do - just adjust the testing pipeline accordingly, as the GitHub actions will automatically run the tests with `pytest`.
 
 In order to run the test suite, use the command
-```
+
+```sh
 $ pytest
 ```
 
@@ -122,9 +134,11 @@ Additionally, it also finds files that weren't executed at all!
 Otherwise they are skipped and might give a wrong impression of the actual coverage.
 
 See the results via
-```
+
+```sh
 $ coverage report
 ```
+
 or `coverage html` to get a more pretty HTML version (which has to be opened outside of the command line).
 
 ## GitHub Actions and Workflows
@@ -152,13 +166,33 @@ For business subscriptions this might look different.
 ## Readme Badges
 
 This section provides the information to maintain the badges on top of this readme.
-While the badges for `black` and `isort` are static, the ones for `coverage` and `flake8` are dynamic and need to be updated if they should reflect the latest status.
-For those two badges we use the library `genbadge`.
+While the badges for `black` and `isort` are static, the ones for `python`, `coverage` and `flake8` are dynamic and need to be updated, if they should reflect the latest status.
+
+For the Python version we use Google's open source `pybadges`.
+For the last two badges we use the library `genbadge`.
+
+### Python Version Badge
+
+According to the [pybadge docu|https://github.com/google/pybadges] the following command generates the badge for the desired Python versions:
+
+```sh
+python -m pybadges \
+    --left-text="python" \
+    --right-text="3.8, 3.9, 3.10, 3.11, 3.12" \
+    --whole-link="https://www.python.org/" \
+    --embed-logo="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/python.svg"
+```
+
+This will print the SVG XML to the console and you will have to store it under badges as `python_badge.svg`.
+To write it to the file append something like `> badges/python_badge.svg` based on your current working directory.
+
+Note that the library can be used to create any custom badge.
 
 ### Coverage Badge
 
 In order to generate and update the coverage badge, run the following sequence of commands after the coverage run:
-```
+
+```sh
 # Create XML summary file, which will be used to generate the badge
 $ coverage xml
 
@@ -169,7 +203,8 @@ $ genbadge coverage -i badges/coverage.xml -o badges/coverage_badge.svg
 ### Flake8 Badge
 
 The following command generates the necessary `flake8` statistics for the badge:
-```
+
+```sh
 # Generate flake8 summary
 $ flake8 . --exit-zero --statistics --tee --output-file badges/flake8stats.txt
 
