@@ -1,3 +1,6 @@
+# Check the following documentation in order to build your own workflows:
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
 name: Check Code Style and Run Tests
 
 on: [push]
